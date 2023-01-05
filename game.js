@@ -35,10 +35,22 @@ function printHelp() {
 
 function getWinner(move1, move2) {
   // Your code here
+
+  if (move1 === move2) {
+    return 0;
+  } else if (move2 === VALID_MOVES[move1]['winsAgainst']) {
+  return 1;
+  } else if (move2 !== VALID_MOVES[move1]['winsAgainst']){
+    return -1;
+  }
 }
 
 function getCPUMove() {
   // Your code here
+  let inputs = ['r', 'p', 's'];
+
+  return inputs[Math.floor(Math.random() * inputs.length)];
+
 }
 
 function processMove(cmd, cpu) {
