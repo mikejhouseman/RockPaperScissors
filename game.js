@@ -48,14 +48,21 @@ function getWinner(move1, move2) {
 function getCPUMove() {
   // Your code here
   let inputs = ['r', 'p', 's'];
-
   return inputs[Math.floor(Math.random() * inputs.length)];
-
 }
 
 function processMove(cmd, cpu) {
-  // Your code here
+console.log(`You pick ${cmd}, computer picks ${cpu}]`);
+if(cpu === "r" && cmd === "r") console.log("You tie.");
+if(cpu === "r" && cmd === "p") console.log("You win!.");
+if(cpu === "p" && cmd === "s") console.log("You lose!.")
 }
+//   if (getWinner(cmd, cpu) === 1) {
+//   console.log('You win!')
+// } else {
+//   console.log('You lose!')
+// }
+
 
 /******************************* MAIN FUNCTION *******************************/
 function promptInput(rl) {
@@ -64,33 +71,26 @@ function promptInput(rl) {
     cmd = cmd.toLowerCase();
 
     if (cmd === 'h') {
-      console.log("\nHelp:\n");
-      console.log("  Type 'r' for Rock");
-      console.log("  Type 'p' for Paper");
-      console.log("  Type 's' for Scissors");
-      console.log("  Type 'q' to quit");
-      console.log("  Type 'h' for a list of valid commands\n");
+      printHelp()
     } else if (cmd === 'q') {
       rl.close();
       return;
     } else if (VALID_MOVES[cmd]){
-      const validMoveKeys = Object.keys(VALID_MOVES);
-      const randomIndex = Math.floor(Math.random() * validMoveKeys.length);
-      const cpu = validMoveKeys[randomIndex];
+      const cpu = getCPUMove
 
       console.log(`You pick ${cmd}, computer picks ${cpu}.`);
-
-      if (cmd === cpu) { // tie
-        console.log("You tie.\n");
-        ties++;
-      }
-      else if (VALID_MOVES[cmd].winsAgainst === cpu) { // win
-        console.log("You win!\n");
-        wins++;
-      } else { // loss
-        console.log("You lose...\n");
-        losses++;
-      }
+      getWinner(cpu, cmd);
+      // if (cmd === cpu) { // tie
+      //   console.log("You tie.\n");
+      //   ties++;
+      // }
+      // else if (VALID_MOVES[cmd].winsAgainst === cpu) { // win
+      //   console.log("You win!\n");
+      //   wins++;
+      // } else { // loss
+      //   console.log("You lose...\n");
+      //   losses++;
+      // }
     } else {
       console.log("\nInvalid command.\n");
       console.log("  Type 'r' for Rock");
